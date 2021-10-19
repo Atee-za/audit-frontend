@@ -208,7 +208,7 @@ public class AuditClient extends JFrame implements ActionListener {
                         viewOpenTickets();
                         break;
                     case 2:
-                        System.out.println("View Closed Tickets under construction!");
+                        viewClosedTickets();
                         break;
                     case 3:
                         viewOpenAllIssues();
@@ -325,7 +325,7 @@ public class AuditClient extends JFrame implements ActionListener {
 
         pnlCenter.updateUI();
     }
-    
+
     private void viewOpenTickets(){
         pnlCenter.removeAll();
         pnlEast.removeAll();
@@ -372,6 +372,40 @@ public class AuditClient extends JFrame implements ActionListener {
         pnlCenter.updateUI();
         pnlEast.updateUI();
     }
+
+  private void viewClosedTickets() {
+    pnlCenter.removeAll();
+    pnlEast.removeAll();
+    pnlSouth.removeAll();
+    JPanel left = new JPanel();
+
+
+    pnlCenter.setLayout(new GridLayout(1,1));
+    left.setLayout(new GridLayout(4,2));
+
+    JLabel ticketHeading = new JLabel("Closed Tickets");
+
+    table = new JTable();
+    Object[] columnHeader = {"Ticket Date","Issue", "Description","Signed-out Date"};
+    tableModel = new DefaultTableModel();
+    tableModel.setColumnIdentifiers(columnHeader);
+    table.setModel(tableModel);
+    table.setBackground(new Color(123, 123,123));
+    table.setForeground(Color.BLACK);
+    table.setFont(new Font("Arial", Font.BOLD, 16));
+    table.setRowHeight(30);
+    table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    table.setDefaultEditor(Object.class, null);
+    scroll = new JScrollPane(table);
+
+    left.add(ticketHeading);
+    left.add(scroll);
+
+
+    pnlCenter.add(left);
+    pnlCenter.updateUI();
+  }
+
     private void viewOpenAllIssues() {
         pnlCenter.removeAll();
         pnlEast.removeAll();
